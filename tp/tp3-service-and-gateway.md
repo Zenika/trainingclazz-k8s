@@ -1,4 +1,4 @@
-# Introduction
+## Introduction
 Un service Kubernetes permet d'exposer une application à ses consommateurs, internes ou externes.
 
 ## Service whoami-svc
@@ -83,12 +83,12 @@ spec:
       command: ["sleep", "infinity"]
 ```
 
-Créer le pod gateway
+Créez le pod gateway
 ```shell script
 kubectl apply -f gateway.yml
 ```
 
-Vérifier que le pod gateway a bien été créé et attendez qu'il soit dans un état *Running*
+Vérifiez que le pod gateway a bien été créé et attendez qu'il soit dans un état *Running*
 
 ```shell script
 kubectl get pods
@@ -108,17 +108,17 @@ Notez bien qu'on a consommé le service par son nom DNS *whoami-svc*, en utilisa
 On ne s'est pas préoccupé de découvrir les IPs des pods qui se cachent derrière.
 
 Exécutez la commande plusieurs fois, vous verrez que des pods différents vous répondent
-(si vous avez pluseiurs réplicas dans votre deployment).
+(si vous avez plusieurs réplicas dans votre deployment).
 
 ## Conclusion
 Les services Kubernetes permettent d'exposer vos applications de façon stable et pérenne.
 Ils load-balancent les requêtes automatiquement vers les pods présents dans la liste des Endpoints.
 Cette liste est maintenue dynamiquement à jour par Kubernetes.
 
-Le type de service que nous avons vu ici s'appelle ClusterIP, c'est le type par défaut. Il y a d'autres types
-de service dans Kubernetes: NodePort, LoadBalancer... À part quelques subtilités, notamment d'expostion à l'extérieur,
-le principe reste le même.
+Le type de service que nous avons vu ici s'appelle ClusterIP, c'est le type par défaut. Il existe d'autres types
+de service dans Kubernetes: [NodePort, LoadBalancer...] (https://kubernetes.io/fr/docs/concepts/services-networking/service/).
+À part quelques subtilités, notamment d'expostion à l'extérieur, le principe reste le même.
 
 ## Bonus
 S'il vous reste du temps à la fin de cette session, essayez de découvrir à quoi correspond le service dont le nom est
-*kubernetes*, et qui apparait lorsque vous lister les services.
+*kubernetes*, et qui apparait lorsque vous listez les services.
