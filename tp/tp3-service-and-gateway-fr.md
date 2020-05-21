@@ -3,7 +3,7 @@ Un service Kubernetes permet d'exposer une application à ses consommateurs, int
 
 ## Service whoami-svc
 Le service *whoami-svc* décrit dans le yaml suivant "accroche" les pods du deployment *whoami* grâce à leurs labels
-*app: whoami*
+*app: whoami* (voir l'entrée selector).
 
 Créez un fichier whoami-svc.yml avec le contenu suivant:
 
@@ -83,7 +83,7 @@ spec:
       command: ["sleep", "infinity"]
 ```
 
-Créez le pod gateway
+Créez le pod gateway:
 ```shell script
 kubectl apply -f gateway.yml
 ```
