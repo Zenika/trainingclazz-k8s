@@ -63,7 +63,7 @@ kubectl describe svc whoami-svc
 ```  
 What do you observe ?
  
-## Request the whomai-svc service from within the gateway pod 
+## Request the whoami-svc service from within the gateway pod 
 
 Create a gateway.yml file with the following content:
 ```yaml
@@ -100,15 +100,15 @@ From within the gateway pod, request the whoami-svc using the curl client:
 curl whoami-svc:8080
 ``` 
 
-Notice that the service has been reached using it's DNS name *whoami-svc*, using the right port.
-We don't bother to find the pod IPs behind this service. It's done automatically for us.
+Notice that the service has been reached using its DNS name *whoami-svc*, using the right port.
+We don't need to bother to find the pod IPs behind this service. It's done automatically for us.
 
 Execute the above command several times. You'll see different responses from different pods if you do have many replicas
 in your deployment.
 
 
 ## Conclusion
-Kubernetes services expose your application in a stable and a persistent way.
+Kubernetes services expose your application in a discoverable and persistent way.
 They load-balance the requests automatically on the different pods present in the Endpoints list of the service.
 The Endpoints list is updated dynamically and transparently by Kubernetes.
 
