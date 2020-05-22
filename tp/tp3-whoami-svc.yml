@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: whoami-svc
+
+spec:
+  selector:
+    app: whoami
+  ports:
+    - port: 8080
+      targetPort: 80

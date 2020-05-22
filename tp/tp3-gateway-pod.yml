@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: gateway
+
+spec:
+  containers:
+    - name: gateway
+      image: centos:7
+      command: ["sleep", "infinity"]
