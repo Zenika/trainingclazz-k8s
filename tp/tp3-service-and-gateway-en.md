@@ -2,39 +2,20 @@
 A Kubernetes *Service* exposes an application to its consumers, whether internal or external.
 
 ## whoami-svc service
-The *whoami-svc* described below handles the pods of the *whoami* deployment using their labels *app: whoami*
+The *whoami-svc* described in the file tp3-whoami-svc.yml handles the pods of the *whoami* deployment using their labels *app: whoami*
 (see the selector entry).
-
-Create a file whoami-svc.yml with the following content:
-
-```yaml
-apiVersion: v1
-kind: Service
-
-metadata:
-  name: whoami-svc
-  
-spec:
-  selector:
-    app: whoami
-  ports:
-    - port: 8080
-      targetPort: 80
-```
  
-Create the service:
-
+Create the *whoami-svc* service from the file tp3-whoami-svc.yml:
 ```shell script
-kubectl apply -f whoami-svc.yml
+kubectl apply -f tp3-whoami-svc.yml
 ``` 
-List the available services, and make sure the *whoami-svc* has been created:
 
+List the available services, and make sure the *whoami-svc* has been created:
 ```shell script
 kubectl get svc
 ``` 
 
 Inspect the service whoami-svc:
-
 ```shell script
 kubectl describe svc whoami-svc 
 ``` 
@@ -65,24 +46,9 @@ What do you observe ?
  
 ## Request the whoami-svc service from within the gateway pod 
 
-Create a gateway.yml file with the following content:
-```yaml
-apiVersion: v1
-kind: Pod
-
-metadata:
-  name: gateway
-  
-spec:
-  containers:
-    - name: gateway
-      image: centos:7
-      command: ["sleep", "infinity"]
-```
-
-Create the gateway Pod:
+Create the gateway Pod described in the file tp3-gateway-pod.yml:
 ```shell script
-kubectl apply -f gateway.yml
+kubectl apply -f tp3-gateway-pod.yml
 ```
 
 Check that the gateway pod has been created and wait until it is in a *Running* state:
@@ -113,7 +79,7 @@ They load-balance the requests automatically on the different pods present in th
 The Endpoints list is updated dynamically and transparently by Kubernetes.
 
 In this exercise we have seen the Kubernetes default type of services which is called ClusterIP.
-There are othe types of services in Kubernetes: [NodePort, LoadBalancer...] (https://kubernetes.io/fr/docs/concepts/services-networking/service/).
+There are other types of services in Kubernetes: [NodePort, LoadBalancer...] (https://kubernetes.io/fr/docs/concepts/services-networking/service/).
 Apart from some subtleties, regarding external exposition for example, all the services share the same concepts as seen here.
 
 ## Bonus

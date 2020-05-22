@@ -2,40 +2,20 @@
 Un service Kubernetes permet d'exposer une application à ses consommateurs, internes ou externes.
 
 ## Service whoami-svc
-Le service *whoami-svc* décrit dans le yaml suivant "accroche" les pods du deployment *whoami* grâce à leurs labels
+Le service *whoami-svc* décrit dans le fichier tp3-whoami-svc.yml "accroche" les pods du deployment *whoami* grâce à leurs labels
 *app: whoami* (voir l'entrée selector).
 
-Créez un fichier whoami-svc.yml avec le contenu suivant:
-
-```yaml
-apiVersion: v1
-kind: Service
-
-metadata:
-  name: whoami-svc
-  
-spec:
-  selector:
-    app: whoami
-  ports:
-    - port: 8080
-      targetPort: 80
-```
- 
-Créez le service:
-
+Créez le service *whoami-svc*:
 ```shell script
-kubectl apply -f whoami-svc.yml
+kubectl apply -f tp3-whoami-svc.yml
 ``` 
 
 Listez les services disponibles, et assurez-vous que le service whoami-svc a bien été créé:
-
 ```shell script
 kubectl get svc
 ``` 
 
 Inspectez le service whoami-svc avec la commande suivante:
-
 ```shell script
 kubectl describe svc whoami-svc 
 ``` 
@@ -68,24 +48,9 @@ Que remarquez-vous ?
  
 ## Consommation du service whoami-svc depuis un pod gateway 
 
-Créez un fichier gateway.yml avec le contenu suivant:
-```yaml
-apiVersion: v1
-kind: Pod
-
-metadata:
-  name: gateway
-  
-spec:
-  containers:
-    - name: gateway
-      image: centos:7
-      command: ["sleep", "infinity"]
-```
-
-Créez le pod gateway:
+Créez le Pod gateway depuis le fichier tp3-gateway-pod.yml:
 ```shell script
-kubectl apply -f gateway.yml
+kubectl apply -f tp3-gateway-pod.yml
 ```
 
 Vérifiez que le pod gateway a bien été créé et attendez qu'il soit dans un état *Running*
