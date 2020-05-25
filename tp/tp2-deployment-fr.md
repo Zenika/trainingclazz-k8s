@@ -33,7 +33,7 @@ whoami   3/3     3            3           5m4s
 ```
 Vous devriez voir le déploiement *whoami*, ainsi que le nombre de réplicas en fonctionnement.
 
-* Consultez les informations détaillés du déploiement *whoami*
+* Consultez les informations détaillées du déploiement *whoami*
 ```bash
 kubectl describe deploy whoami
 ```
