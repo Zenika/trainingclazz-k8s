@@ -68,7 +68,7 @@ whoami-66688d8f77-dbs5j   1/1     Running   0          8s
 whoami-66688d8f77-mh946   1/1     Running   0          21m
 ```
 Comme vous pouvez le voir vous avez toujours 3 réplicas. Il y a cependant une différence par rapport à tout à l'heure : un des réplicas est plus jeune que les autres (et il a un identifiant que vous n'aviez pas précédemment).  
-Comment cela fonctionne t'il ? Votre descripteur de `deployment` spécifie que vous deviez avoir 3 `replicas`. Le `controller manager` de kubernetes fait en sorte que l'état réel et l'état désiré soit alignés.
+Comment cela fonctionne-t-il ? Votre descripteur de `deployment` spécifie que vous deviez avoir 3 `replicas`. Le `controller manager` de kubernetes fait en sorte que l'état réel et l'état désiré soit alignés.
 
 * Changez le nombre de réplicas :
 ```bash
