@@ -6,7 +6,7 @@ Vous utiliserez la commande [`kubectl`](https://kubernetes.io/docs/reference/gen
 
 ## Déployer une application
 
-Dans ce TP, vous allez déployer une image docker de l'application [whoami](https://github.com/containous/whoami). Il s'agit d'une application web qui affiche des information sur l'hôte qui l'herberge (ainsi que sur requête http).
+Dans ce TP, vous allez déployer une image docker de l'application [whoami](https://github.com/containous/whoami). Il s'agit d'une application web qui affiche des informations sur l'hôte qui l'héberge (ainsi que sur la requête http).
 
 Pour cela vous allez *apply* (appliquer) le descripteur yaml du *deployment* [tp2-deploy-whoami.yaml](./tp2-deploy-whoami.yaml) :
 ```bash
