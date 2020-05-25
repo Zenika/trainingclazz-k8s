@@ -34,3 +34,7 @@ echo "@kineZ" > /home/ubuntu/code-password
 
 #Start code server
 docker run -d --restart always -p 0.0.0.0:9999:8080 -e PASSWORD="$(cat /home/ubuntu/code-password)" -v "/home/ubuntu:/home/coder/project" -u "$(id -u ubuntu):$(id -g ubuntu)" codercom/code-server:latest
+
+node_mane=master-0
+hostname $node_mane
+echo "127.0.0.1 $node_mane" >> /etc/hosts
