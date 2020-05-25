@@ -49,7 +49,7 @@ pod/whoami-66688d8f77-7cg4r   1/1     Running   0          14m
 pod/whoami-66688d8f77-mh946   1/1     Running   0          14m
 pod/whoami-66688d8f77-w9pxj   1/1     Running   0          14m
 ```
-Vous pouvez constater que les 3 pods ont bien été créer pour correspondre à l'état désiré.
+Vous pouvez constater que les 3 pods ont bien été créés pour correspondre à l'état désiré.
 
 * Que se passe t'il si un pod est "détruit" ?  
 
