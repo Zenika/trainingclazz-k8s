@@ -2,7 +2,7 @@
 
 Les [Deployments](https://kubernetes.io/fr/docs/concepts/workloads/controllers/deployment/) vous permettent de gérer vos [Pods](https://kubernetes.io/fr/docs/concepts/workloads/pods/pod/). Cet objet vous permettra de mettre à jour et ou à l'echelle vos applications.
 
-Vous utiliserez la commande [`kubectl`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) pour interagir avec notre cluster.
+Vous utiliserez la commande [`kubectl`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) pour interagir avec votre cluster.
 
 ## Déployer une application
 
