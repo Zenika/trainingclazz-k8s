@@ -44,7 +44,7 @@ kubeadm init
 systemctl status kubelet
 ```
 
-- L'initialisation a notamment créer les fichiers de configurations et identification de votre cluster
+- L'initialisation a notamment créé les fichiers de configurations et identification de votre cluster
 
 ```shell
 ll /etc/kubernetes/*.conf
