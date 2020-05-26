@@ -30,6 +30,6 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
 # ⚠️⚠️⚠️ CHANGE X values for each worker (1-2-3) ⚠️⚠️⚠️
-node_mane=worker-X
-hostname $node_mane
-echo "127.0.0.1 $node_mane" >> /etc/hosts
+node_name=worker-X
+hostname $node_name
+echo "127.0.0.1 $node_name" >> /etc/hosts

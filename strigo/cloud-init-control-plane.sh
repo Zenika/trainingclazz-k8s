@@ -35,9 +35,9 @@ echo "@kineZ" > /home/ubuntu/code-password
 #Start code server
 docker run -d --restart always -p 0.0.0.0:9999:8080 -e PASSWORD="$(cat /home/ubuntu/code-password)" -v "/home/ubuntu:/home/coder/project" -u "$(id -u ubuntu):$(id -g ubuntu)" codercom/code-server:latest
 
-node_mane=master-0
-hostname $node_mane
-echo "127.0.0.1 $node_mane" >> /etc/hosts
+node_name=control-plane
+hostname $node_name
+echo "127.0.0.1 $node_name" >> /etc/hosts
 
 git clone https://github.com/Zenika/trainingclazz-k8s.git  /home/ubuntu/lab
 
