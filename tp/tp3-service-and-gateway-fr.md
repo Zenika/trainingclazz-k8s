@@ -80,7 +80,7 @@ Les services Kubernetes permettent d'exposer vos applications de façon stable e
 Ils load-balancent les requêtes automatiquement vers les pods présents dans la liste des Endpoints.
 Cette liste est maintenue dynamiquement à jour par Kubernetes.
 
-Le type de service que nous avons vu ici s'appelle ClusterIP, c'est le type par défaut. Il existe d'autres types
+Le type de service que vous avez vu ici s'appelle ClusterIP, c'est le type par défaut. Il existe d'autres types
 de service dans Kubernetes: [NodePort, LoadBalancer...] (https://kubernetes.io/fr/docs/concepts/services-networking/service/).
 À part quelques subtilités, notamment d'expostion à l'extérieur, le principe reste le même.
 
