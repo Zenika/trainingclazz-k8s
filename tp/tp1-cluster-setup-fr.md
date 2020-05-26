@@ -68,7 +68,7 @@ Vous pouvez maintenant utiliser votre cluster. Mais pour que la commande `kubect
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-(le sudo est utile quand vous n'êtes pas root et vous permets de configurer kubectl pour votre utilisateur)  
+(le sudo est utile quand vous n'êtes pas root et vous permet de configurer kubectl pour votre utilisateur)  
 
 - Vous devriez pouvoir maintenant utiliser `kubectl` pour interagir avec votre cluster
 - Vérifier l'état du cluster avec `kubectl get nodes`
