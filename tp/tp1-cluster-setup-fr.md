@@ -71,8 +71,8 @@ Vous pouvez maintenant utiliser votre cluster. Mais pour que la commande `kubect
 (le sudo est utile quand vous n'êtes pas root et vous permet de configurer kubectl pour votre utilisateur)  
 
 - Vous devriez pouvoir maintenant utiliser `kubectl` pour interagir avec votre cluster
-- Vérifier l'état du cluster avec `kubectl get nodes`
-- Vérifier l'état des pods système du cluster avec `kubectl get pods -n kube-system`
+- Vérifiez l'état du cluster avec `kubectl get nodes`
+- Vérifiez l'état des pods système du cluster avec `kubectl get pods -n kube-system`
 
 
 ### Workers
@@ -83,8 +83,8 @@ Vous pouvez maintenant utiliser votre cluster. Mais pour que la commande `kubect
 kubeadm token create --print-join-command
 ```
 
-Pour créer et associer au cluster un `worker node`, exécutez sur chacun des `worker node` la commande qui a été généré précédemment (avec la commande `kubeadm token ....`).  
-Quand vous avez fini depuis le `control plane node` (d'où vous avez configuré kubectl pour qu'il interagisse avec votre cluster), vérifiez que vous avez bien tout les `nodes` dans votre cluster :
+Pour créer et associer au cluster un `worker node`, exécutez sur chacun des `worker node` la commande qui a été générée précédemment (avec la commande `kubeadm token ....`).  
+Quand vous avez fini depuis le `control plane node` (d'où vous avez configuré kubectl pour qu'il interagisse avec votre cluster), vérifiez que vous avez bien tous les `nodes` dans votre cluster :
 
 ```shell
 kubectl get nodes
