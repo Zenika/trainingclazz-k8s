@@ -10,7 +10,7 @@ sudo su -
 
 ## Installation de Kubernetes
 
-Vous utiliserez  `kubeadm` construire votre cluster.  
+Vous utiliserez  `kubeadm` pour construire votre cluster.  
 Il sera composé de :
 
 - 1 noeud `Control-plane`
