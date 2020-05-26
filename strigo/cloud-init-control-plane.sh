@@ -42,3 +42,6 @@ echo "127.0.0.1 $node_name" >> /etc/hosts
 git clone https://github.com/Zenika/trainingclazz-k8s.git  /home/ubuntu/lab
 
 chown -R ubuntu:ubuntu /home/ubuntu/lab
+
+#Enable autocompletion ubuntu user
+echo "source <(kubectl completion bash)" >> /home/ubuntu/.bashrc # add autocomplete permanently to your bash shell.
