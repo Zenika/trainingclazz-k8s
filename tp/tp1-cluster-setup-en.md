@@ -1,6 +1,6 @@
 # Lab 1
 
-We will have to run everything as root:
+You will have to run everything as root:
 
 ```shell
 sudo su - 
@@ -8,7 +8,7 @@ sudo su -
 
 ## Kubernetes Installation
 
-We'll use `kubeadm` to spawn our cluster.
+You'll use `kubeadm` to spawn our cluster.
 Our cluster will be composed of:
 
 - 1 Control-plane node
@@ -25,8 +25,9 @@ kubeadm init phase preflight
 
 ### Control plane
 
-With kubeadm, control-plane components are spawned as static pods on the node's
-kubelet.
+<!> The commands in this section will be executed from the `node` where you want to install the `control plane`
+
+With kubeadm, control-plane components are spawned as static pods on the node's kubelet.
 
 Let's init the control plane:
 
@@ -37,6 +38,7 @@ kubeadm init
 - kubeadm starts the kubelet with the right config on this node as a systemd service
 
 ```shell
+# check the kubelet status
 systemctl status kubelet
 ```
 
@@ -64,22 +66,22 @@ Now you can use your cluster, but you need to configure kubectl for cluster admi
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+(sudo is useful when you are not root and allows you to configure kubectl for your user)  
 
-- At this point, you should be able to use `kubectl` to interact with the
-  cluster.
+- At this point, you should be able to use `kubectl` to interact with the cluster
 - Check cluster state with `kubectl get nodes`
 - Check cluster components pods with `kubectl get pods -n kube-system`
 
 
 ### Workers
 
-- kubeadm generate a bootstrap token in his init phase, the following one prints the command which we'll use to join the cluster:
+- kubeadm generate a bootstrap token in his init phase, the following one prints the command which you'll use to join the cluster:
 
 ```shell
 kubeadm token create --print-join-command
 ```
 
-To deploy worker nodes, just execute the join command on each of them.
+To deploy worker nodes, just execute the join command on each of them.  
 When this is done, go back to the first node and check the cluster state:
 
 ```shell
@@ -91,7 +93,7 @@ kubectl get nodes
 At this moment, the cluster isn't in a usable state. You can check it with:
 `kubectl get nodes`. It still lacks a network addon to enable cross cluster
 communication. There are many availables, you can check it [there](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network).
-We will deploy _Weave Net_.
+You will deploy _Weave Net_.
 
 - Deploy a network solution on the cluster
 
@@ -101,19 +103,20 @@ K8S_VERSION=$(kubectl version | base64 | tr -d '\n')
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=${K8S_VERSION}"
 ```
 
-- Check that nodes are now ready with:
+- Check that nodes are now `Ready` with:
 
 ```shell
 kubectl get nodes -w
 ```
+(`-w` : watch)
 
-- Create a nginx pod:
+- Create the `pod` pod with nginx image:
   `kubectl run nginx-pod --image=nginx` 
 
 - Create a centos pod:  
   `kubectl run shell-pod --image=centos:7 -- sleep infinity` 
 
-- Get the IP of nginx pod: 
+- Get the IP of the pods: 
   `kubectl get pods -o wide`
 
 - Check that the 2 pods can communicate:
