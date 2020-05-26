@@ -56,7 +56,7 @@ ll /etc/kubernetes/*.conf
 ll /etc/kubernetes/manifests/
 ```
 
-- Constatez qu'il y a différents conteneurs `docker` qui sont maintenant démarré sur le noeud du `control-plane`
+- Constatez qu'il y a différents conteneurs `docker` qui sont maintenant démarrés sur le noeud du `control-plane`
 
 ```shell
 docker container ls
