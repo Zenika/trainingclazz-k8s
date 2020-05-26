@@ -1,5 +1,8 @@
 # trainingClazz Kubernetes
 
+- [Slides](https://docs.google.com/presentation/d/1Km6fKKyd0GVOaTKz5Rdeu8sC8mtWT3CeeaCeM-4N_Ts/edit?usp=sharing)
+- [Strigo](https://strigo.io)
+
 ## Version française
 
 - [Lab 1 : Installation de Kubernetes](tp/tp1-cluster-setup-fr.md)
