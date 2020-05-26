@@ -38,3 +38,7 @@ docker run -d --restart always -p 0.0.0.0:9999:8080 -e PASSWORD="$(cat /home/ubu
 node_mane=master-0
 hostname $node_mane
 echo "127.0.0.1 $node_mane" >> /etc/hosts
+
+git clone https://github.com/Zenika/trainingclazz-k8s.git  /home/ubuntu/lab
+
+chown -R ubuntu:ubuntu /home/ubuntu/lab
