@@ -5,7 +5,7 @@ Now you want to go public and open your application to external clients. One way
 
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster.
 To be able to create Ingress objects in your cluster, you need to first install an *Ingress Controller*. 
-We will use Traefik, a powerful Ingress Controller and reverse proxy (https://containo.us/traefik/)
+You will use Traefik, a powerful Ingress Controller and reverse proxy (https://containo.us/traefik/)
 
 ## Install Traefik
 
@@ -47,13 +47,17 @@ Open your browser and copy/paste the DNS name you retrieved earlier.
 You will get an answer from the *whoami* application right in your browser.
 
 ## Conclusion
+
 Congratulations ! you have successfully deployed your application on Kubernetes and made it public !
 
 ## Further info about deploying and exposing an Ingress Controller
-Here, we used the simplest way to deploy and expose the Traefik ingress controller.
-We could have used more replicas in the Deployment or used a DaemonSet to make it highly available. 
-Furthermore, we could have exposed it via a NodePort service to make it accessible on any node of the cluster.
+
+Here, you used the simplest way to deploy and expose the Traefik ingress controller.
+You could have used more replicas in the Deployment or used a DaemonSet to make it highly available. 
+Furthermore, you could have exposed it via a NodePort service to make it accessible on any node of the cluster.
 When the infra allows it, the Ingress Controller is better exposed via a LoadBalancer service and hence making it
 accessible without using the nodes DNS names.
 
 Please check the Traefik online documentation for more info and discover the fresh Traefik v2: https://docs.traefik.io
+
+Enjoy !
