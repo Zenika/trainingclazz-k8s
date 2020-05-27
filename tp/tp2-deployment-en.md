@@ -6,22 +6,22 @@ From now on, we'll be interacting with the cluster thanks to the [`kubectl` comm
 
 ## Deploy the application
 
-In this lab, we're going to deploy the [whoami](https://github.com/containous/whoami) application. It's a tiny webserver that prints out information about the node it's deployed on.
+In this lab, we're going to deploy the [cataas](https://github.com/containous/cataas) application. It's a tiny webserver that prints out information about the node it's deployed on.
 
-To do that, we're going to *apply* the yaml descriptor [tp2-deploy-whoami.yaml](./tp2-deploy-whoami.yaml) :
+To do that, we're going to *apply* the yaml descriptor [tp2-deploy-cataas.yaml](./tp2-deploy-cataas.yaml) :
 ```bash
-kubectl apply -f tp2-deploy-whoami.yaml
+kubectl apply -f tp2-deploy-cataas.yaml
 ```
 
-As you can see in the yaml, this descriptor will create a deployment called **whoami**. This deployment is going to control **3 pod replicas** based on the whoami docker image.
+As you can see in the yaml, this descriptor will create a deployment called **cataas**. This deployment is going to control **3 pod replicas** based on the cataas docker image.
 
 ## Check
 
 * Check that the deployment was successfully applied 
 ```bash
-kubectl rollout status deploy whoami
+kubectl rollout status deploy cataas
 # It should print the following 
-deployment "whoami" successfully rolled out
+deployment "cataas" successfully rolled out
 ```
 
 * List all your deployments
@@ -29,13 +29,13 @@ deployment "whoami" successfully rolled out
 kubectl get deploy
 # It should print something similar to below 
 NAME     READY   UP-TO-DATE   AVAILABLE   AGE
-whoami   3/3     3            3           5m4s
+cataas   3/3     3            3           5m4s
 ```
-Here you can see your `whoami` deployment. You can also see the number of replicas currently running.
+Here you can see your `cataas` deployment. You can also see the number of replicas currently running.
 
 * Get the details of that deployments
 ```bash
-kubectl describe deploy whoami
+kubectl describe deploy cataas
 ```
 This commands allows to get more info about your deployment, especially the number of replicas and the pod template.
 
@@ -44,9 +44,9 @@ This commands allows to get more info about your deployment, especially the numb
 kubectl get po
 # It should print something similar to below 
 NAME                          READY   STATUS    RESTARTS   AGE
-pod/whoami-66688d8f77-7cg4r   1/1     Running   0          14m
-pod/whoami-66688d8f77-mh946   1/1     Running   0          14m
-pod/whoami-66688d8f77-w9pxj   1/1     Running   0          14m
+pod/cataas-66688d8f77-7cg4r   1/1     Running   0          14m
+pod/cataas-66688d8f77-mh946   1/1     Running   0          14m
+pod/cataas-66688d8f77-w9pxj   1/1     Running   0          14m
 ```
 Here you can see that 3 pods were created as requested.
 
@@ -54,16 +54,16 @@ Here you can see that 3 pods were created as requested.
 
 1. Pick a pod from the previous command and delete it
 ```bash
-kubectl delete po whoami-66688d8f77-w9pxj
+kubectl delete po cataas-66688d8f77-w9pxj
 ```
 2. Now let's print the pods again 
 ```bash
 kubectl get po 
 # It should print something similar to below
 NAME                      READY   STATUS    RESTARTS   AGE
-whoami-66688d8f77-7cg4r   1/1     Running   0          21m
-whoami-66688d8f77-dbs5j   1/1     Running   0          8s
-whoami-66688d8f77-mh946   1/1     Running   0          21m
+cataas-66688d8f77-7cg4r   1/1     Running   0          21m
+cataas-66688d8f77-dbs5j   1/1     Running   0          8s
+cataas-66688d8f77-mh946   1/1     Running   0          21m
 ```
 As you can see, you still have 3 replicas. Also note that the age is different on one pod. That's the one that the deployment created automatically when you deleted a pod.  
 Why ? Because in your deployment descriptor, you requested 3 replicas. So whatever happens, the kubernetes controller manager will do everything to maintain that number.
@@ -71,12 +71,12 @@ Why ? Because in your deployment descriptor, you requested 3 replicas. So whatev
 * Change the number of replicas :
 ```bash
 # Lets increase the number of replicas
-kubectl scale deploy whoami --replicas=5
+kubectl scale deploy cataas --replicas=5
 # Get the deployment again
-kubectl get deploy whoami
+kubectl get deploy cataas
 # It should print something like below
 NAME     READY   UP-TO-DATE   AVAILABLE   AGE
-whoami   5/5     5            5           28m
+cataas   5/5     5            5           28m
 ```
 As you can see, there is now 5 replicas attached to your deployment.
 
