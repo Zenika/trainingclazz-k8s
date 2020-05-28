@@ -47,13 +47,13 @@ systemctl status kubelet
 - L'initialisation a notamment créé les fichiers de configurations et identification de votre cluster
 
 ```shell
-ll /etc/kubernetes/*.conf
+ls /etc/kubernetes/*.conf
 ```
 
 - Ainsi que les fichiers de définitions statiques (*manifest*) des `pods` du `control-plane`.
 
 ```shell
-ll /etc/kubernetes/manifests/
+ls /etc/kubernetes/manifests/
 ```
 
 - Constatez qu'il y a différents conteneurs `docker` qui sont maintenant démarrés sur le noeud du `control-plane`
