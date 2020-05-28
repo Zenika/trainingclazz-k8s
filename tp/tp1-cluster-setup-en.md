@@ -1,11 +1,5 @@
 # Lab 1
 
-We will have to run everything as root:
-
-```shell
-sudo su - 
-```
-
 ## Kubernetes Installation
 
 We'll use `kubeadm` to spawn our cluster.
@@ -20,7 +14,7 @@ Steps:
 - Check node requirements:
 
 ```shell
-kubeadm init phase preflight
+sudo kubeadm init phase preflight
 ```
 
 ### Control plane
@@ -31,7 +25,7 @@ kubelet.
 Let's init the control plane:
 
 ```shell
-kubeadm init
+sudo kubeadm init
 ```
 
 - kubeadm starts the kubelet with the right config on this node as a systemd service
@@ -43,19 +37,19 @@ systemctl status kubelet
 - After that it generates kubeconfig file which holds their credentials and information on the cluster.
 
 ```shell
-ll /etc/kubernetes/*.conf
+sudo ll /etc/kubernetes/*.conf
 ```
 
 - kubeadm creates the static pods manifests for control-plane components.
 
 ```shell
-ll /etc/kubernetes/manifests/
+sudo ll /etc/kubernetes/manifests/
 ```
 
 - Check that control-plane components containers are running:
 
 ```shell
-docker container ls
+sudo docker container ls
 ```
 
 Now you can use your cluster, but you need to configure kubectl for cluster admin:
@@ -76,11 +70,11 @@ Now you can use your cluster, but you need to configure kubectl for cluster admi
 - kubeadm generate a bootstrap token in his init phase, the following one prints the command which we'll use to join the cluster:
 
 ```shell
-kubeadm token create --print-join-command
+sudo kubeadm token create --print-join-command
 ```
 
-To deploy worker nodes, just execute the join command on each of them.
-When this is done, go back to the first node and check the cluster state:
+To deploy worker nodes, just execute the join command on each of them (with sudo).
+When this is done, go back to the control-plane node and check the cluster state:
 
 ```shell
 kubectl get nodes
