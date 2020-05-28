@@ -37,13 +37,13 @@ systemctl status kubelet
 - After that it generates kubeconfig file which holds their credentials and information on the cluster.
 
 ```shell
-sudo ll /etc/kubernetes/*.conf
+sudo ls /etc/kubernetes/*.conf
 ```
 
 - kubeadm creates the static pods manifests for control-plane components.
 
 ```shell
-sudo ll /etc/kubernetes/manifests/
+sudo ls /etc/kubernetes/manifests/
 ```
 
 - Check that control-plane components containers are running:
