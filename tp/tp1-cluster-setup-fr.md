@@ -1,13 +1,5 @@
 # Lab 1
 
-Pour simplifier l'atelier vous passerez toutes les commandes en tant qu'utilisateur `root`
-
-Pour passer en `root` :
-
-```shell
-sudo su - 
-```
-
 ## Installation de Kubernetes
 
 Vous utiliserez  `kubeadm` pour construire votre cluster.  
@@ -34,32 +26,32 @@ kubeadm init phase preflight
 Initialisez le `control plane` (depuis le bon `node`):
 
 ```shell
-kubeadm init
+sudo kubeadm init
 ```
 
 - kubeadm démarre (sur ce noeud) le kubelet en tant service `systemd` avec la bonne configuration
 
 ```shell
 # Vérifiez l'état du service kubelet
-systemctl status kubelet
+sudo systemctl status kubelet
 ```
 
 - L'initialisation a notamment créé les fichiers de configurations et identification de votre cluster
 
 ```shell
-ls /etc/kubernetes/*.conf
+sudo ls /etc/kubernetes/*.conf
 ```
 
 - Ainsi que les fichiers de définitions statiques (*manifest*) des `pods` du `control-plane`.
 
 ```shell
-ls /etc/kubernetes/manifests/
+sudo ls /etc/kubernetes/manifests/
 ```
 
 - Constatez qu'il y a différents conteneurs `docker` qui sont maintenant démarrés sur le noeud du `control-plane`
 
 ```shell
-docker container ls
+sudo docker container ls
 ```
 
 Vous pouvez maintenant utiliser votre cluster. Mais pour que la commande `kubectl` interagisse avec celui-ci, vous devez récupérer le fichier de configuration lui permettant de se connecter avec des droits administrateur :
@@ -80,7 +72,7 @@ Vous pouvez maintenant utiliser votre cluster. Mais pour que la commande `kubect
 - Utilisez kubeadm pour créer un jeton de démarrage ainsi que la commande `kubeadm join ...` que vous utiliserez sur chacun des `worker node`. 
 
 ```shell
-kubeadm token create --print-join-command
+sudo kubeadm token create --print-join-command
 ```
 
 Pour créer et associer au cluster un `worker node`, exécutez sur chacun des `worker node` la commande qui a été générée précédemment (avec la commande `kubeadm token ....`).  
@@ -100,7 +92,7 @@ Dans cet atelier, vous utiliserez le `CNI` _Weave Net_.
 - Mettre en place le `CNI` _Weave Net_ sur le cluster
 
 ```shell
-sysctl net.bridge.bridge-nf-call-iptables=1
+sudo sysctl net.bridge.bridge-nf-call-iptables=1
 K8S_VERSION=$(kubectl version | base64 | tr -d '\n')
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=${K8S_VERSION}"
 ```
