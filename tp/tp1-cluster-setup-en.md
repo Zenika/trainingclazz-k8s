@@ -90,7 +90,7 @@ We will deploy _Weave Net_.
 - Deploy a network solution on the cluster
 
 ```shell
-sysctl net.bridge.bridge-nf-call-iptables=1
+sudo sysctl net.bridge.bridge-nf-call-iptables=1
 K8S_VERSION=$(kubectl version | base64 | tr -d '\n')
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=${K8S_VERSION}"
 ```
