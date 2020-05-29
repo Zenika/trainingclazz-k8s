@@ -1,6 +1,6 @@
 # trainingClazz Kubernetes
 
-- [Slides](https://docs.google.com/presentation/d/1Km6fKKyd0GVOaTKz5Rdeu8sC8mtWT3CeeaCeM-4N_Ts/edit?usp=sharing)
+- [Slides](https://drive.google.com/file/d/1o6tNUHNQhq_2C5vqvoJLoSQmvMUN2JWH/view?usp=sharing)
 - [Strigo](https://strigo.io)
 
 ## Version française
