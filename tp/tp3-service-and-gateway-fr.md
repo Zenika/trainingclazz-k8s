@@ -1,23 +1,23 @@
 ## Introduction
 Un service Kubernetes permet d'exposer une application à ses consommateurs, internes ou externes.
 
-## Service whoami-svc
-Le service *whoami-svc* décrit dans le fichier tp3-whoami-svc.yml "accroche" les pods du deployment *whoami* grâce à leurs labels
-*app: whoami* (voir l'entrée selector).
+## Service cataas-svc
+Le service *cataas-svc* décrit dans le fichier tp3-cataas-svc.yml "accroche" les pods du deployment *cataas* grâce à leurs labels
+*app: cataas* (voir l'entrée selector).
 
-Créez le service *whoami-svc*:
+Créez le service *cataas-svc*:
 ```shell script
-kubectl apply -f tp3-whoami-svc.yml
+kubectl apply -f tp3-cataas-svc.yml
 ``` 
 
-Listez les services disponibles, et assurez-vous que le service whoami-svc a bien été créé:
+Listez les services disponibles, et assurez-vous que le service cataas-svc a bien été créé:
 ```shell script
 kubectl get svc
 ``` 
 
-Inspectez le service whoami-svc avec la commande suivante:
+Inspectez le service cataas-svc avec la commande suivante:
 ```shell script
-kubectl describe svc whoami-svc 
+kubectl describe svc cataas-svc 
 ``` 
 
 Remarquez la section *Endpoints* du service. Elle contient les IPs et ports des pods vers lesquels
@@ -27,26 +27,26 @@ kubernetes enverra les requêtes destinées au service.
 
 Scalez votre déploiement en passant à 2 réplicas:
 ```shell script
-kubectl scale deploy whoami --replicas=2
+kubectl scale deploy cataas --replicas=2
 ```
 
 Observez la section Endpoints du service:
 ```shell script
-kubectl describe svc whoami-svc
+kubectl describe svc cataas-svc
 ```  
 
 Repassez à 3 réplicas:
 ```shell script
-kubectl scale deploy whoami --replicas=3
+kubectl scale deploy cataas --replicas=3
 ```
 
 Et observez à nouveau la liste des Endpoints
 ```shell
-kubectl describe svc whoami-svc
+kubectl describe svc cataas-svc
 ```  
 Que remarquez-vous ?
  
-## Consommation du service whoami-svc depuis un pod gateway 
+## Consommation du service cataas-svc depuis un pod gateway 
 
 Créez le Pod gateway depuis le fichier tp3-gateway-pod.yml:
 ```shell script
@@ -64,12 +64,12 @@ Connectez-vous au pod gateway en exécutant la commande suivante:
 kubectl exec -it gateway -- bash
 ``` 
 
-Depuis le pod gateway, consommez le service whoami-svc avec le client curl:
+Depuis le pod gateway, consommez le service cataas-svc avec le client curl:
 ```shell script
-curl whoami-svc:8080
+curl cataas-svc:8080/api
 ``` 
 
-Notez bien qu'on a consommé le service par son nom DNS *whoami-svc*, en utilisant le bon port du service.
+Notez bien qu'on a consommé le service par son nom DNS *cataas-svc*, en utilisant le bon port du service.
 On ne s'est pas préoccupé de découvrir les IPs des pods qui se cachent derrière.
 
 Exécutez la commande plusieurs fois, vous verrez que des pods différents vous répondent

@@ -2,23 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: whoami
+  name: cataas
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: whoami
+      app: cataas
   template:
     metadata:
       labels:
-        app: whoami
+        app: cataas
     spec:
+      terminationGracePeriodSeconds: 2
       containers:
-      - name: whoami
-        image: containous/whoami
+      - name: cataas
+        image: y0an/cataas:1.0
         resources:
           limits:
             memory: "128Mi"
-            cpu: "100m"
+            cpu: "500m"
         ports:
         - containerPort: 80

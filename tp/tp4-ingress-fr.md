@@ -1,6 +1,6 @@
 ## Introduction
 
-Dans l'execrice précédent, vous avez exposé l'application *whoami* à l'intérieur du cluster grâce à un service ClusterIP.
+Dans l'execrice précédent, vous avez exposé l'application *cataas* à l'intérieur du cluster grâce à un service ClusterIP.
 Maintenant vous voulez la rendre publique en l'exposant aux clients externes. Une façon d'atteindre cet objectif est
 d'utiliser un Ingress Kubernetes.
 
@@ -22,7 +22,7 @@ Installez *Traefik* :
 kubectl apply -f tp4-traefik-ingress-controller.yml
 ```
 
-## Exposer l'application whoami avec un Ingress
+## Exposer l'application cataas avec un Ingress
 
 Dans cet exercice, Traefik est déployé en tant que Deployment à 1 réplica. Trouvez le noeud sur lequel tourne le Pod Traefik : 
 ```shell script
@@ -31,11 +31,11 @@ kubectl get pod -o wide -n kube-system | grep traefik
 
 Dans votre interface Strigo, connectez-vous à ce noeud pour récupérer son nom DNS public en utilisant le menu "machine info".
 
-Enfin, **éditer** le fichier tp4-whoami-ingress.yml et renseignez le nom DNS que vous venez de récupérer dans l'entrée `host` (ligne 11).
+Enfin, **éditer** le fichier tp4-cataas-ingress.yml et renseignez le nom DNS que vous venez de récupérer dans l'entrée `host` (ligne 11).
 
-Créez l'Ingress *whoami-ingress* :
+Créez l'Ingress *cataas-ingress* :
 ```shell script
-kubectl apply -f tp4-whoami-ingress.yml
+kubectl apply -f tp4-cataas-ingress.yml
 ```
 
 Vous pouvez visualiser l'Ingress créé :
@@ -43,10 +43,23 @@ Vous pouvez visualiser l'Ingress créé :
 kubectl get ing 
 ```
 
-## Accéder à l'application whoami dans votre navigateur
+## Accéder à l'application cataas dans votre navigateur
 
 Ouvrez un navigateur et copiez/collez le nom DNS récupéré précédemment.
-Vous obtiendrez une réponse de votre application whoami !
+Vous obtiendrez une réponse de votre application cataas !
+
+## Mettre à jour l'application cataas
+
+Modifiez le `1.0` par une `2.0` dans le fichier [tp2-deploy-cataas.yaml](./tp2-deploy-cataas.yaml), puis:
+
+```bash
+kubectl apply -f tp2-deploy-cataas.yaml
+```
+
+Puis obsersez les changements s'opérant automatiquement:
+```bash
+watch --interval=1 kubectl get deployment,rs,pods
+```
 
 ## Conclusion
 

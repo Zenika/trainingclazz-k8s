@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 
 metadata:
-  name: whoami-ingress
+  name: cataas-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
 
@@ -12,5 +12,5 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: whoami-svc
+              serviceName: cataas-svc
               servicePort: 8080
