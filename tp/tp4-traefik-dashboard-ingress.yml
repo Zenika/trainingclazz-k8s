@@ -1,17 +1,16 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
-
 metadata:
-  name: whoami-ingress
+  name: traefik-dashboard-ingress
+  namespace: kube-system
   annotations:
     kubernetes.io/ingress.class: traefik
-
 spec:
   rules:
     - host: <Put the public DNS name of the node running traefik here, something like ec2-35-180-127-98.eu-west-3.compute.amazonaws.com>
       http:
         paths:
-          - path: /whoami
+          - path: /
             backend:
-              serviceName: whoami-svc
-              servicePort: 8080
+              serviceName: traefik-dashboard
+              servicePort: web

@@ -31,7 +31,7 @@ menu.
 
 Finally, **edit** the file tp4-whoami-ingress.yml and put the DNS name you just retrieved in the `host` entry (line 11).
 
-Create the *whoami-ingress*:
+Create the Ingress *whoami-ingress*:
 ```shell script
 kubectl apply -f tp4-whoami-ingress.yml
 ```
@@ -43,8 +43,20 @@ kubectl get ing
 
 ## Access the whoami application in your browser
 
-Open your browser and copy/paste the DNS name you retrieved earlier.
+Open your browser and copy/paste the DNS name you retrieved earlier followed by the path */whoami*.
 You will get an answer from the *whoami* application right in your browser.
+
+## Expose the Traefik dashboard
+
+**Edit** the tp4-traefik-dashboard-ingress.yml file and put the DNS name you used earlier in the `host` entry (ligne 10).
+
+Create the Ingress *traefik-dashboard-ingress* :
+```shell script
+kubectl apply -f tp4-traefik-dashboard-ingress.yml
+```
+
+You can now visualize the Traefik dashboard by visiting the URL composed by the DNS name used earlier followed by the
+path */* in your browser.
 
 ## Conclusion
 
