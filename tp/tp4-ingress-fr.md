@@ -57,7 +57,8 @@ Créez l'Ingress *traefik-dashboard-ingress* :
 kubectl apply -f tp4-traefik-dashboard-ingress.yml
 ```
 
-Vous pouvez maintenant visualiser le dashboard Traefik en visitant le nom DNS utilisé précédemment dans votre navigateur.
+Vous pouvez maintenant visualiser le dashboard Traefik en ouvrant l'url avec le nom DNS utilisé précédemment suivi
+de */* dans votre navigateur.
 
 ## Conclusion
 
