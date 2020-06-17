@@ -45,8 +45,19 @@ kubectl get ing
 
 ## Accéder à l'application whoami dans votre navigateur
 
-Ouvrez un navigateur et copiez/collez le nom DNS récupéré précédemment.
+Ouvrez un navigateur et copiez/collez le nom DNS récupéré précédemment suivi du chemin */whoami*.
 Vous obtiendrez une réponse de votre application whoami !
+
+## Exposer le dashboard Traefik
+
+**Éditer** le fichier tp4-traefik-dashboard-ingress.yml et renseignez le même nom DNS que précédemment dans l'entrée `host` (ligne 10).
+
+Créez l'Ingress *traefik-dashboard-ingress* :
+```shell script
+kubectl apply -f tp4-traefik-dashboard-ingress.yml
+```
+
+Vous pouvez maintenant visualiser le dashboard Traefik en visitant le nom DNS utilisé précédemment dans votre navigateur.
 
 ## Conclusion
 
