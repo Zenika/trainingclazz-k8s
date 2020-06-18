@@ -28,6 +28,10 @@ kubectl get pod -o wide -n kube-system | grep traefik
 
 Connect to that node using your Strigo interface, and retrieve the public DNS name of that node using the machine info
 menu.
+If you have difficulties accessing "machine info", you can try one of these tricks : 
+
+- In the browser with the dev tools : `document.querySelector('div.object.connect-local').click()`
+- Or from the terminal : `nslookup $(curl ifconfig.me)`
 
 Finally, **edit** the file tp4-whoami-ingress.yml and put the DNS name you just retrieved in the `host` entry (line 11).
 
