@@ -1,6 +1,6 @@
 ## Introduction
 
-Dans l'execrice précédent, vous avez exposé l'application *whoami* à l'intérieur du cluster grâce à un service ClusterIP.
+Dans l'exercice précédent, vous avez exposé l'application *whoami* à l'intérieur du cluster grâce à un service ClusterIP.
 Maintenant vous voulez la rendre publique en l'exposant aux clients externes. Une façon d'atteindre cet objectif est
 d'utiliser un Ingress Kubernetes.
 
