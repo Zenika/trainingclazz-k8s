@@ -1,0 +1,1 @@
+1. Open the application by going to this URL: http://{{ .Values.ingress.webui.host }}

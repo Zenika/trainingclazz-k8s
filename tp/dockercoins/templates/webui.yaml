@@ -1,0 +1,103 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "webui.fullname" . }}
+  labels:
+    {{- include "dockercoins.labels" . | nindent 4 }}
+    component: webui
+spec:
+  replicas: {{ .Values.replicaCount.webui }}
+  selector:
+    matchLabels:
+      {{- include "dockercoins.selectorLabels" . | nindent 6 }}
+      component: webui
+  template:
+    metadata:
+      labels:
+        {{- include "dockercoins.selectorLabels" . | nindent 8 }}
+        component: webui
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "dockercoins.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.webui.repository }}:{{ default .Values.image.default.version .Values.image.webui.version }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "webui.name" . }}
+  labels:
+    {{- include "dockercoins.labels" . | nindent 4 }}
+    component: webui
+spec:
+  type: {{ default .Values.service.default.type .Values.service.webui.type }}
+  ports:
+    - port: {{ default .Values.service.default.port .Values.service.webui.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "dockercoins.selectorLabels" . | nindent 4 }}
+    component: webui
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "webui.fullname" . }}
+  labels:
+    {{- include "dockercoins.labels" . | nindent 4 }}
+    component: webui
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.webui.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "webui.name" . }}
+                port:
+                    number: {{ default .Values.service.default.port .Values.service.webui.port }}

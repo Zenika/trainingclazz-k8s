@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hasher.fullname" . }}
+  labels:
+    {{- include "dockercoins.labels" . | nindent 4 }}
+    component: hasher
+spec:
+  replicas: {{ .Values.replicaCount.hasher }}
+  selector:
+    matchLabels:
+      {{- include "dockercoins.selectorLabels" . | nindent 6 }}
+      component: hasher
+  template:
+    metadata:
+      labels:
+        {{- include "dockercoins.selectorLabels" . | nindent 8 }}
+        component: hasher
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "dockercoins.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.hasher.repository }}:{{ default .Values.image.default.version .Values.image.hasher.version }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "hasher.name" . }}
+  labels:
+    {{- include "dockercoins.labels" . | nindent 4 }}
+    component: hasher
+spec:
+  type: {{ default .Values.service.default.type .Values.service.hasher.type }}
+  ports:
+    - port: {{ default .Values.service.default.port .Values.service.hasher.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "dockercoins.selectorLabels" . | nindent 4 }}
+    component: hasher

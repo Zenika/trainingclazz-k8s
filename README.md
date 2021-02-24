@@ -9,6 +9,7 @@
 - [Lab 2 : Déployer une application](tp/tp2-deployment-fr.md)
 - [Lab 3 : Accès et répartition de charge](tp/tp3-service-and-gateway-fr.md)
 - [Lab 4 : Exposition de l'application](tp/tp4-ingress-fr.md)
+- [Lab 5 : Helm](tp/tp5-helm-fr.md)
 
 ## English Version
 
@@ -16,4 +17,5 @@
 - [Lab 2: Deploying an application](tp/tp2-deployment-en.md)
 - [Lab 3: Access and loadbalancing](tp/tp3-service-and-gateway-en.md)
 - [Lab 4: Application exposition](tp/tp4-ingress-en.md)
+- [Lab 5: Helm](tp/tp5-helm-en.md)
 
