@@ -5,8 +5,7 @@
 We'll use `kubeadm` to spawn our cluster.
 Our cluster will be composed of:
 
-- 1 Control-plane node
-- 3 Worker nodes
+- 1 Control-plane/Worker node
 
 Steps:
 
@@ -65,20 +64,16 @@ Now you can use your cluster, but you need to configure kubectl for cluster admi
 - Check cluster components pods with `kubectl get pods -n kube-system`
 
 
-### Workers
+### Transformation du control-plane en worker
 
-- kubeadm generate a bootstrap token in his init phase, the following one prints the command which we'll use to join the cluster:
-
-```shell
-sudo kubeadm token create --print-join-command
-```
-
-To deploy worker nodes, just execute the join command on each of them (with sudo).
-When this is done, go back to the control-plane node and check the cluster state:
+- Here, our cluster will have only one node which will be used as `control-plane` and `worker`
+- Transform the control-plane into a worker:
 
 ```shell
-kubectl get nodes
+kubectl taint node control-plane node-role.kubernetes.io/master-
 ```
+
+- This command removes a restriction which prevents application from running on a `control-plane` node
 
 ## 2.3: Network solution
 
