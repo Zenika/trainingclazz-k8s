@@ -5,7 +5,8 @@
 Vous utiliserez  `kubeadm` pour construire votre cluster.  
 Il sera composé de :
 
-- 1 noeud `Control-plane`/`Worker`
+- 1 noeud `Control-plane`
+- 3 noeuds `Worker`
 
 Étapes :
 
@@ -66,16 +67,20 @@ Vous pouvez maintenant utiliser votre cluster. Mais pour que la commande `kubect
 - Vérifiez l'état des pods système du cluster avec `kubectl get pods -n kube-system`
 
 
-### Transformation du control-plane en worker
+### Workers
 
-- Ici notre cluster n'aura qu'un seul noeud qui fera office de `control-plane` et de `worker`
-- Transformez le control-plane en worker avec la commande suivante :
+- Utilisez kubeadm pour créer un jeton de démarrage ainsi que la commande `kubeadm join ...` que vous utiliserez sur chacun des `worker node`. 
 
 ```shell
-kubectl taint node control-plane node-role.kubernetes.io/master-
+sudo kubeadm token create --print-join-command
 ```
 
-- Cette commande enlève une restriction qui empêche normalement vos applications de fonctionner sur un noeud du `control-plane`
+Pour créer et associer au cluster un `worker node`, exécutez sur chacun des `worker node` la commande qui a été générée précédemment (avec la commande `kubeadm token ....`).  
+Quand vous avez fini depuis le `control plane node` (d'où vous avez configuré kubectl pour qu'il interagisse avec votre cluster), vérifiez que vous avez bien tous les `nodes` dans votre cluster :
+
+```shell
+kubectl get nodes
+```
 
 ## 2.3: Installation du réseau
 
