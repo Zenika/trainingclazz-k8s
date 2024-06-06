@@ -38,7 +38,7 @@ docker container run --name expose-ingress-controller --detach --network minikub
 
 ## Ingress whoami
 
-> **Note**: For the rest of the lab, replace `FIXME`, with the IP of your minikube machine: `minikube ip`
+> **Note**: For the rest of the lab, replace `FIXME`, with the public IP of your minikube machine: `${PUBLIC_IP}`
 
 - Expose the `whoami` Service by an _Ingress_ which will have to respond on the url `whoami.FIXME.sslip.io`
 
@@ -55,15 +55,5 @@ kubectl apply -f tp5-whoami-ingress.yml
 ## Conclusion
 
 Congratulations ! you have successfully deployed your application on Kubernetes and made it public !
-
-## Further info about deploying and exposing an Ingress Controller
-
-Here, you used the simplest way to deploy and expose the Traefik ingress controller.
-You could have used more replicas in the Deployment or used a DaemonSet to make it highly available.
-Furthermore, you could have exposed it via a NodePort service to make it accessible on any node of the cluster.
-When the infra allows it, the Ingress Controller is better exposed via a LoadBalancer service and hence making it
-accessible without using the nodes DNS names.
-
-Please check the Traefik online documentation for more info and discover the fresh Traefik v2: https://docs.traefik.io
 
 Enjoy !
