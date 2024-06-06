@@ -10,8 +10,7 @@ In this lab, we're going to deploy the [whoami](https://github.com/containous/wh
 
 To do that, we're going to *apply* the yaml descriptor [tp2-deploy-whoami.yaml](./tp2-deploy-whoami.yaml) :
 ```bash
-cd ~/workspace/trainingclazz-k8s/resources
-kubectl apply -f tp2-deploy-whoami.yaml
+kubectl apply -f tp3-deploy-whoami.yaml
 ```
 
 As you can see in the yaml, this descriptor will create a deployment called **whoami**. This deployment is going to control **3 pod replicas** based on the whoami docker image.

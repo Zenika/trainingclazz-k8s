@@ -18,12 +18,13 @@ minikube status
 
 ### Download resources
 
-Download the lab from the [zenika's github](https://github.com/Zenika/trainingclazz-k8s).
+Download the lab from the [zenika's github](https://github.com/Zenika/trainingclazz-k8s/tree/refonte).
 
 ```shell
 mkdir -p ~/workspace
 cd ~/workspace
 git clone -b refonte https://github.com/Zenika/trainingclazz-k8s
+cd ~/workspace/trainingclazz-k8s/resources
 ```
 
 ℹ️ You can use this repo anytime outside this lab ;-)

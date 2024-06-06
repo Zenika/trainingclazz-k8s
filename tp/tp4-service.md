@@ -4,12 +4,12 @@ A Kubernetes *Service* exposes an application to its consumers, whether internal
 
 ## whoami-svc service
 
-The *whoami-svc* described in the file `tp3-whoami-svc.yml` handles the pods of the *whoami* deployment using their labels *app: whoami*
+The *whoami-svc* described in the file `tp4-whoami-svc.yml` handles the pods of the *whoami* deployment using their labels *app: whoami*
 (see the selector entry).
 
-Create the *whoami-svc* service from the file tp3-whoami-svc.yml:
+Create the *whoami-svc* service from the file `tp4-whoami-svc.yml`:
 ```shell script
-kubectl apply -f tp3-whoami-svc.yml
+kubectl apply -f tp4-whoami-svc.yml
 ```
 
 List the available services, and make sure the *whoami-svc* has been created:
@@ -48,9 +48,9 @@ What do you observe ?
 
 ## Request the whoami-svc service from within the gateway pod
 
-Create the gateway Pod described in the file tp3-gateway-pod.yml:
+Create the gateway Pod described in the file `tp4-gateway-pod.yml`:
 ```shell script
-kubectl apply -f tp3-gateway-pod.yml
+kubectl apply -f tp4-gateway-pod.yml
 ```
 
 Check that the gateway pod has been created and wait until it is in a *Running* state:
