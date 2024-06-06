@@ -7,60 +7,57 @@ Ingress exposes HTTP and HTTPS routes from outside the cluster to services withi
 To be able to create Ingress objects in your cluster, you need to first install an *Ingress Controller*.
 You will use Traefik, a powerful Ingress Controller and reverse proxy (https://containo.us/traefik/)
 
-## Install Traefik
+## Ingress Controller
 
-Apply this Role Based Access Control (RBAC) that allow Traefik to know some information on your service:
-```shell script
-kubectl apply -f tp4-traefik-rbac.yml
+- Create the Namespace `shopping`:
+
+```shell
+kubectl create namespace shopping
 ```
 
-Install *Traefik*:
-```shell script
-kubectl apply -f tp4-traefik-ingress-controller.yml
+- Setup the CLI to the Namespace `shopping`:
+
+```shell
+kubens shopping
 ```
 
-## Expose the whoami application using an Ingress
+- Activate the `ingress` addon:
 
-Here, Traefik is deployed as a Deployment with one replica. Find out the node on which runs the corresponding Pod:
-```shell script
-kubectl get pod -o wide -n kube-system | grep traefik
+```shell
+minikube addons enable ingress
 ```
 
-Connect to that node using your Strigo interface, and retrieve the public DNS name of that node using the machine info
-menu.
-If you have difficulties accessing "machine info", you can try one of these tricks :
+- Wait for the controller to be ready by running the following command:
 
-- In the browser with the dev tools : `document.querySelector('div.object.connect-local').click()`
-- Or from the terminal : `nslookup $(curl ifconfig.me)`
-
-Finally, **edit** the file tp4-whoami-ingress.yml and put the DNS name you just retrieved in the `host` entry (line 11).
-
-Create the Ingress *whoami-ingress*:
-```shell script
-kubectl apply -f tp4-whoami-ingress.yml
+```shell
+kubectl wait --namespace ingress-nginx\
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller\
+  --timeout=90s
 ```
 
-You can view the created ingress using:
-```shell script
-kubectl get ing
+- Display all objects created in the `ingress-nginx` Namespace with the following command:
+
+```shell
+kubectl get pod,svc,deploy,rs,job -n ingress-nginx
 ```
 
-## Access the whoami application in your browser
+- Expose the Ingress Controller:
 
-Open your browser and copy/paste the DNS name you retrieved earlier followed by the path */whoami*.
-You will get an answer from the *whoami* application right in your browser.
-
-## Expose the Traefik dashboard
-
-**Edit** the tp4-traefik-dashboard-ingress.yml file and put the DNS name you used earlier in the `host` entry (ligne 10).
-
-Create the Ingress *traefik-dashboard-ingress* :
-```shell script
-kubectl apply -f tp4-traefik-dashboard-ingress.yml
+```shell
+docker container run --name expose-ingress-controller --detach --network minikube --publish 80:80 alpine/socat tcp-listen:80,fork,reuseaddr tcp-connect:minikube:80
 ```
 
-You can now visualize the Traefik dashboard by visiting the URL composed by the DNS name used earlier followed by the
-path */* in your browser.
+## Ingress whoami
+
+> **Note**: For the rest of the lab, replace `FIXME`, with the IP of your minikube machine: `minikube ip`
+
+- Expose the `whoami` Service by an _Ingress_ which will have to respond on the url `whoami.FIXME.sslip.io`
+- Check that the _Ingress_ is correctly configured with `kubectl get ingress`
+- Test the url `http://whoami.FIXME.sslip.io/`, check by refreshing the page that you arrive alternately on the different Pods of the Service (see `Hostname`)
+
+- Observe the logs of the Pod `ingress-nginx-controller-...` of the Namespace `ingress-nginx`
+
 
 ## Conclusion
 

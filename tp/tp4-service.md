@@ -73,6 +73,14 @@ You don't need to bother to find the pod IPs behind this service. It's done auto
 
 Execute the above command several times. You'll see different responses from different pods if you do have many replicas in your deployment.
 
+You can check the DNS response directly:
+
+```shell
+kubectl exec gateway -- nslookup whoami
+kubectl exec gateway -- nslookup whoami.default
+kubectl exec gateway -- nslookup whoami.default.svc
+kubectl exec gateway -- nslookup whoami.default.svc.cluster.local
+```
 
 ## Conclusion
 
