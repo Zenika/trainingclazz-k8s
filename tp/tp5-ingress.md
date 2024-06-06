@@ -9,18 +9,6 @@ You will use Traefik, a powerful Ingress Controller and reverse proxy (https://c
 
 ## Ingress Controller
 
-- Create the Namespace `shopping`:
-
-```shell
-kubectl create namespace shopping
-```
-
-- Setup the CLI to the Namespace `shopping`:
-
-```shell
-kubens shopping
-```
-
 - Activate the `ingress` addon:
 
 ```shell
@@ -53,6 +41,11 @@ docker container run --name expose-ingress-controller --detach --network minikub
 > **Note**: For the rest of the lab, replace `FIXME`, with the IP of your minikube machine: `minikube ip`
 
 - Expose the `whoami` Service by an _Ingress_ which will have to respond on the url `whoami.FIXME.sslip.io`
+
+```shell
+kubectl apply -f tp5-whoami-ingress.yml
+```
+
 - Check that the _Ingress_ is correctly configured with `kubectl get ingress`
 - Test the url `http://whoami.FIXME.sslip.io/`, check by refreshing the page that you arrive alternately on the different Pods of the Service (see `Hostname`)
 
