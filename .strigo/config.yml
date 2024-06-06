@@ -1,20 +1,13 @@
 ---
 classes:
   - exercises:
-      - title: Lab 1 - Cluster setup 
-        file: ../tp/tp1-cluster-setup-fr.md
-      - title: Lab 2 - Déploiement
-        file: ../tp/tp2-deployment-fr.md
-      - title: Lab 3 - Service et test
-        file: ../tp/tp3-service-and-gateway-fr.md
-      - title: Lab 4 - Ingress
-        file: ../tp/tp4-ingress-fr.md
-
-      - title: Lab 1 - Cluster setup 
-        file: ../tp/tp1-cluster-setup-en.md
-      - title: Lab 2 - Deployment
-        file: ../tp/tp2-deployment-en.md
-      - title: Lab 3 - Service and test
-        file: ../tp/tp3-service-and-gateway-en.md
-      - title: Lab 4 - Ingress
-        file: ../tp/tp4-ingress-en.md
+      - title: Lab 1 - minikube usage
+        file: ../tp/tp1-minikube.md
+      - title: Lab 2 - kubectl run
+        file: ../tp/tp2-kubectl.md
+      - title: Lab 3 - Deployment
+        file: ../tp/tp3-deployment.md
+      - title: Lab 4 - Service and test
+        file: ../tp/tp4-service.md
+      - title: Lab 5 - Ingress
+        file: ../tp/tp5-ingress.md
