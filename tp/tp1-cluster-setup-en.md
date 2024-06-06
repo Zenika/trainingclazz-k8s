@@ -14,7 +14,7 @@ Steps:
 - Check node requirements:
 
 ```shell
-sudo kubeadm init phase preflight
+kubeadm init phase preflight
 ```
 
 ### Control plane
@@ -25,7 +25,7 @@ kubelet.
 Let's init the control plane:
 
 ```shell
-sudo kubeadm init
+kubeadm init
 ```
 
 - kubeadm starts the kubelet with the right config on this node as a systemd service
@@ -37,26 +37,20 @@ systemctl status kubelet
 - After that it generates kubeconfig file which holds their credentials and information on the cluster.
 
 ```shell
-sudo ls /etc/kubernetes/*.conf
+ls /etc/kubernetes/*.conf
 ```
 
 - kubeadm creates the static pods manifests for control-plane components.
 
 ```shell
-sudo ls /etc/kubernetes/manifests/
-```
-
-- Check that control-plane components containers are running:
-
-```shell
-sudo docker container ls
+ls /etc/kubernetes/manifests/
 ```
 
 Now you can use your cluster, but you need to configure kubectl for cluster admin:
 ```shell
   mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 - At this point, you should be able to use `kubectl` to interact with the
@@ -70,7 +64,7 @@ Now you can use your cluster, but you need to configure kubectl for cluster admi
 - kubeadm generate a bootstrap token in his init phase, the following one prints the command which we'll use to join the cluster:
 
 ```shell
-sudo kubeadm token create --print-join-command
+kubeadm token create --print-join-command
 ```
 
 To deploy worker nodes, just execute the join command on each of them (with sudo).
@@ -83,21 +77,24 @@ kubectl get nodes
 ## 2.3: Network solution
 
 At this moment, the cluster isn't in a usable state. You can check it with:
-`kubectl get nodes`. It still lacks a network addon to enable cross cluster
-communication. There are many availables, you can check it [there](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network).
-We will deploy _Weave Net_.
 
-- Deploy a network solution on the cluster
+```shell-session
+kubectl get nodes
+```
 
-```shell
-sudo sysctl net.bridge.bridge-nf-call-iptables=1
-K8S_VERSION=$(kubectl version | base64 | tr -d '\n')
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=${K8S_VERSION}"
+It still lacks a network addon to enable cross cluster
+communication. There are many available, you can check it [there](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network).
+We will deploy _Cilium_.
+
+- *On the control plane*, deploy a network solution on the cluster
+
+```shell-session
+cilium install --set cni.chainingMode=portmap
 ```
 
 - Check that nodes are now ready with:
 
-```shell
+```shell-session
 kubectl get nodes -w
 ```
 
