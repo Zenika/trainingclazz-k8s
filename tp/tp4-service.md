@@ -72,6 +72,7 @@ Notice that the service has been reached using its DNS name *whoami*, using the 
 You don't need to bother to find the pod IPs behind this service. It's done automatically for us.
 
 Execute the above command several times. You'll see different responses from different pods if you do have many replicas in your deployment.
+Exit the container with `exit`.
 
 You can check the DNS response directly:
 

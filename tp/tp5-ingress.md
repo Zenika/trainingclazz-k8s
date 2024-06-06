@@ -38,8 +38,7 @@ docker container run --name expose-ingress-controller --detach --network minikub
 
 ## Ingress whoami
 
-> **Note**: For the rest of the lab, replace `FIXME`, with the public IP of your minikube machine: `${PUBLIC_IP}`
-
+- Edit the file `tp5-whoami-ingress.yml` in order to replace `FIXME` with the public IP of yourmachine: `${PUBLIC_IP}`
 - Expose the `whoami` Service by an _Ingress_ which will have to respond on the url `whoami.FIXME.sslip.io`
 
 ```shell
@@ -50,7 +49,6 @@ kubectl apply -f tp5-whoami-ingress.yml
 - Test the url `http://whoami.FIXME.sslip.io/`, check by refreshing the page that you arrive alternately on the different Pods of the Service (see `Hostname`)
 
 - Observe the logs of the Pod `ingress-nginx-controller-...` of the Namespace `ingress-nginx`
-
 
 ## Conclusion
 
