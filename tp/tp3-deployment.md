@@ -1,4 +1,4 @@
-# Lab 2 
+# Lab 3 - Deployment
 
 [Deployments](https://kubernetes.io/fr/docs/concepts/workloads/controllers/deployment/) allow you to manage [Pods](https://kubernetes.io/fr/docs/concepts/workloads/pods/pod/). With this resource, you'll be able to update and scale quickly and easily your applications.
 
@@ -10,24 +10,24 @@ In this lab, we're going to deploy the [whoami](https://github.com/containous/wh
 
 To do that, we're going to *apply* the yaml descriptor [tp2-deploy-whoami.yaml](./tp2-deploy-whoami.yaml) :
 ```bash
-kubectl apply -f tp2-deploy-whoami.yaml
+kubectl apply -f tp3-deploy-whoami.yaml
 ```
 
 As you can see in the yaml, this descriptor will create a deployment called **whoami**. This deployment is going to control **3 pod replicas** based on the whoami docker image.
 
 ## Check
 
-* Check that the deployment was successfully applied 
+* Check that the deployment was successfully applied
 ```bash
 kubectl rollout status deploy whoami
-# It should print the following 
+# It should print the following
 deployment "whoami" successfully rolled out
 ```
 
 * List all your deployments
 ```bash
 kubectl get deploy
-# It should print something similar to below 
+# It should print something similar to below
 NAME     READY   UP-TO-DATE   AVAILABLE   AGE
 whoami   3/3     3            3           5m4s
 ```
@@ -42,7 +42,7 @@ This commands allows to get more info about your deployment, especially the numb
 * List the pods
 ```bash
 kubectl get po
-# It should print something similar to below 
+# It should print something similar to below
 NAME                          READY   STATUS    RESTARTS   AGE
 pod/whoami-66688d8f77-7cg4r   1/1     Running   0          14m
 pod/whoami-66688d8f77-mh946   1/1     Running   0          14m
@@ -50,22 +50,22 @@ pod/whoami-66688d8f77-w9pxj   1/1     Running   0          14m
 ```
 Here you can see that 3 pods were created as requested.
 
-* Now what happens if we delete a pod ? Lets try it.  
+* Now what happens if we delete a pod ? Lets try it.
 
 1. Pick a pod from the previous command and delete it
 ```bash
 kubectl delete po whoami-66688d8f77-w9pxj
 ```
-2. Now let's print the pods again 
+2. Now let's print the pods again
 ```bash
-kubectl get po 
+kubectl get po
 # It should print something similar to below
 NAME                      READY   STATUS    RESTARTS   AGE
 whoami-66688d8f77-7cg4r   1/1     Running   0          21m
 whoami-66688d8f77-dbs5j   1/1     Running   0          8s
 whoami-66688d8f77-mh946   1/1     Running   0          21m
 ```
-As you can see, you still have 3 replicas. Also note that the age is different on one pod. That's the one that the deployment created automatically when you deleted a pod.  
+As you can see, you still have 3 replicas. Also note that the age is different on one pod. That's the one that the deployment created automatically when you deleted a pod.
 Why ? Because in your deployment descriptor, you requested 3 replicas. So whatever happens, the kubernetes controller manager will do everything to maintain that number.
 
 * Change the number of replicas :
