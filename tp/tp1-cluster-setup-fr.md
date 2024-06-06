@@ -26,41 +26,34 @@ kubeadm init phase preflight
 Initialisez le `control plane` (depuis le bon `node`):
 
 ```shell
-sudo kubeadm init
+kubeadm init
 ```
 
 - kubeadm démarre (sur ce noeud) le kubelet en tant service `systemd` avec la bonne configuration
 
 ```shell
 # Vérifiez l'état du service kubelet
-sudo systemctl status kubelet
+systemctl status kubelet
 ```
 
 - L'initialisation a notamment créé les fichiers de configurations et identification de votre cluster
 
 ```shell
-sudo ls /etc/kubernetes/*.conf
+ls /etc/kubernetes/*.conf
 ```
 
 - Ainsi que les fichiers de définitions statiques (*manifest*) des `pods` du `control-plane`.
 
 ```shell
-sudo ls /etc/kubernetes/manifests/
-```
-
-- Constatez qu'il y a différents conteneurs `docker` qui sont maintenant démarrés sur le noeud du `control-plane`
-
-```shell
-sudo docker container ls
+ls /etc/kubernetes/manifests/
 ```
 
 Vous pouvez maintenant utiliser votre cluster. Mais pour que la commande `kubectl` interagisse avec celui-ci, vous devez récupérer le fichier de configuration lui permettant de se connecter avec des droits administrateur :
 ```shell
   mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-(le sudo est utile quand vous n'êtes pas root et vous permet de configurer kubectl pour votre utilisateur)  
 
 - Vous devriez pouvoir maintenant utiliser `kubectl` pour interagir avec votre cluster
 - Vérifiez l'état du cluster avec `kubectl get nodes`
@@ -72,7 +65,7 @@ Vous pouvez maintenant utiliser votre cluster. Mais pour que la commande `kubect
 - Utilisez kubeadm pour créer un jeton de démarrage ainsi que la commande `kubeadm join ...` que vous utiliserez sur chacun des `worker node`. 
 
 ```shell
-sudo kubeadm token create --print-join-command
+kubeadm token create --print-join-command
 ```
 
 Pour créer et associer au cluster un `worker node`, exécutez sur chacun des `worker node` la commande qui a été générée précédemment (avec la commande `kubeadm token ....`).  
@@ -85,16 +78,20 @@ kubectl get nodes
 ## 2.3: Installation du réseau
 
 Votre cluster n'est pas encore fonctionnel. Vous voyez cela en passant la commande `kubectl get nodes`.  
+
+```shell-session
+kubectl get nodes
+```
+
 Il manque encore le `network addon` pour permettre à vos `pods` de communiquer.
 Il y a de nombreuses solutions. Vous pouvez voir cela [ici](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network).  
-Dans cet atelier, vous utiliserez le `CNI` _Weave Net_.
+Dans cet atelier, vous utiliserez le `CNI` _Cilium_.
 
-- Mettre en place le `CNI` _Weave Net_ sur le cluster
+- Mettre en place le `CNI` _Cilium_ sur le cluster
+- *Sur le noeud control plane*, déployez _Cilium_
 
-```shell
-sudo sysctl net.bridge.bridge-nf-call-iptables=1
-K8S_VERSION=$(kubectl version | base64 | tr -d '\n')
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=${K8S_VERSION}"
+```shell-session
+cilium install --set cni.chainingMode=portmap
 ```
 
 - Vérifiez que les pods sont maintenant `Ready` :
