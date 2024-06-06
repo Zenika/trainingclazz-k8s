@@ -23,7 +23,7 @@ Download the lab from the [zenika's github](https://github.com/Zenika/trainingcl
 ```shell
 mkdir -p ~/workspace
 cd ~/workspace
-git clone https://github.com/Zenika/trainingclazz-k8s
+git clone -b refonte https://github.com/Zenika/trainingclazz-k8s
 ```
 
 ℹ️ You can use this repo anytime outside this lab ;-)
