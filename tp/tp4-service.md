@@ -2,24 +2,24 @@
 
 A Kubernetes *Service* exposes an application to its consumers, whether internal or external.
 
-## whoami-svc service
+## whoami service
 
-The *whoami-svc* described in the file `tp4-whoami-svc.yml` handles the pods of the *whoami* deployment using their labels *app: whoami*
+The *whoami* described in the file `tp4-whoami-svc.yml` handles the pods of the *whoami* deployment using their labels *app: whoami*
 (see the selector entry).
 
-Create the *whoami-svc* service from the file `tp4-whoami-svc.yml`:
+Create the *whoami* service from the file `tp4-whoami-svc.yml`:
 ```shell script
 kubectl apply -f tp4-whoami-svc.yml
 ```
 
-List the available services, and make sure the *whoami-svc* has been created:
+List the available services, and make sure the *whoami* has been created:
 ```shell script
 kubectl get svc
 ```
 
-Inspect the service whoami-svc:
+Inspect the service whoami:
 ```shell script
-kubectl describe svc whoami-svc
+kubectl describe svc whoami
 ```
 
 Notice the *Endpoints* section. It contains the IPs and ports of the service's destination pods.
@@ -32,7 +32,7 @@ kubectl scale deploy whoami --replicas=2
 
 Check the Endpoints section of the Service:
 ```shell script
-kubectl describe svc whoami-svc
+kubectl describe svc whoami
 ```
 
 Scale up to 3 replicas:
@@ -42,11 +42,11 @@ kubectl scale deploy whoami --replicas=3
 
 And check the Endpoints section again:
 ```shell
-kubectl describe svc whoami-svc
+kubectl describe svc whoami
 ```
 What do you observe ?
 
-## Request the whoami-svc service from within the gateway pod
+## Request the whoami service from within the gateway pod
 
 Create the gateway Pod described in the file `tp4-gateway-pod.yml`:
 ```shell script
@@ -63,12 +63,12 @@ Connect to the gateway pod using:
 kubectl exec -it gateway -- bash
 ```
 
-From within the gateway pod, request the whoami-svc using the curl client:
+From within the gateway pod, request the whoami using the curl client:
 ```shell script
-curl whoami-svc:8080
+curl whoami:8080
 ```
 
-Notice that the service has been reached using its DNS name *whoami-svc*, using the right port.
+Notice that the service has been reached using its DNS name *whoami*, using the right port.
 You don't need to bother to find the pod IPs behind this service. It's done automatically for us.
 
 Execute the above command several times. You'll see different responses from different pods if you do have many replicas in your deployment.
