@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gateway
+spec:
+  containers:
+    - name: shell-in-pod
+      image: zenika/k8s-training-tools:v5
+      command:
+        - bash
+        - -c
+        - sleep infinity
